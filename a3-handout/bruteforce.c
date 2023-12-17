@@ -4,9 +4,12 @@
 #include <assert.h>
 
 int* knn(int k, int d, int n, const double *points, const double* query) {
-  int* closest = malloc(d * sizeof(int));
-  int points_inserted = 0;
-  for (int i = 0; i < n; i++) {
+  int* closest = (int*)malloc(k * sizeof(int));
+  for (int i = 0; i < k; ++i) {
+      closest[i] = -1;
+  }
+
+  for (int i = 0; i < n; ++i) {
     insert_if_closer(k, d, points, closest, query, i);
   }
   return closest;

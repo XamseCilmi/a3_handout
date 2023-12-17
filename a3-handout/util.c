@@ -22,14 +22,15 @@ int insert_if_closer(int k, int d,
 
   for (int i = 0; i < k; i++) {
     if (closest[i] != -1) {
-      double current_distance = distance(d, &points[i * d], query);
+      double current_distance = distance(d, &points[closest[i] * d], query);
       if (current_distance > farthest_distance) {
         farthest_index = i;
         farthest_distance = current_distance;
       }
-    }
-    else {
+    } else {
       farthest_index = i;
+      closest[farthest_index] = candidate;
+      farthest_distance = candidate_distance;  // Set farthest_distance to candidate_distance
       break;
     }
   }
